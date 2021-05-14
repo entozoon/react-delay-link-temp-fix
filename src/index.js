@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
-import React from "react";
-import PropTypes from "prop-types";
-import { BrowserRouter as Router, withRouter } from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { BrowserRouter as Router, withRouter } from 'react-router-dom';
+import { createBrowserHistory } from "history";
 
 /**
  * A React component to trigger Router links with a delay
@@ -34,8 +35,11 @@ export class DelayLink extends React.Component {
    * @param {Event} e
    */
   handleClick(e) {
-    const { to, clickAction, history } = this.props;
+    const {
+      to, clickAction,
+    } = this.props;
     let { delay, replace } = this.props;
+    const history = createBrowserHistory();
 
     delay = parseInt(delay, 10);
     replace = !!replace;
@@ -66,14 +70,8 @@ export class DelayLink extends React.Component {
     const { children } = this.props;
     delete props.delay;
     return (
-      <Router history={history}>
-        <div
-          role="link"
-          onClick={this.handleClick}
-          onKeyPress={this.handleClick}
-        >
-          {children}
-        </div>
+      <Router>
+      <div role="link" onClick={this.handleClick} onKeyPress={this.handleClick}>{children}</div>
       </Router>
     );
   }
@@ -98,18 +96,18 @@ DelayLink.propTypes = {
   history: PropTypes.oneOfType([PropTypes.object]),
   /**
    * The Component's child elements (provided by React)
-   */
+  */
   children: PropTypes.oneOfType([PropTypes.element]),
   /**
    * An optional function to invoke before setting up the timeout
-   */
+  */
   clickAction: PropTypes.oneOfType([PropTypes.func]),
 };
 
 DelayLink.defaultProps = {
   delay: 0,
   replace: false,
-  to: "",
+  to: '',
   history: {},
   children: null,
   clickAction: () => {},

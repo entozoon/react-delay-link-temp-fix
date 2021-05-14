@@ -30,6 +30,9 @@
     "url": "https://github.com/entozoon/react-delay-link-temp-fix/issues"
   },
   "homepage": "https://github.com/entozoon/react-delay-link-temp-fix#readme",
+  "dependencies": {
+    "history": "^5.0.0"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
